@@ -1,11 +1,11 @@
-import path from 'path';
+const path = require('path');
 
-import { getOptions } from 'loader-utils';
-import { validate } from 'schema-utils';
-import mime from 'mime-types';
+const { getOptions } = require('loader-utils');
+const { validate } = require('schema-utils');
+const mime =  require('mime-types');
 
-import normalizeFallback from './utils/normalizeFallback';
-import schema from './options.json';
+const normalizeFallback = require('./utils/normalizeFallback');
+const schema = require('./options.json');
 
 // 判断是否需要转化成base64
 function shouldTransform(limit, size) {
@@ -82,7 +82,7 @@ function getEncodedData(generator, mimetype, encoding, content, resourcePath) {
 
 
 // main，入口函数
-export default function loader(content) {
+module.exports =function (content) {
   // Loader Options
   const options = getOptions(this) || {};
 
@@ -126,7 +126,7 @@ export default function loader(content) {
   } = normalizeFallback(options.fallback, options);
 
   // Require the fallback.
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line global-require, const/no-dynamic-require
   const fallback = require(fallbackLoader);
 
   // Call the fallback, passing a copy of the loader context. The copy has the query replaced. This way, the fallback
@@ -139,4 +139,4 @@ export default function loader(content) {
 }
 
 // Loader Mode
-export const raw = true;
+// export const raw = true;

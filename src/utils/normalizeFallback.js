@@ -1,6 +1,6 @@
-import loaderUtils from 'loader-utils';
+const loaderUtils = require('loader-utils');
 
-export default function normalizeFallback(fallback, originalOptions) {
+module.exports =  function normalizeFallback(fallback, originalOptions) {
   let loader = 'file-loader'; // 默认会使用file-loader处理
   let options = {};
 
